@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state";
 import { useNavigate } from "react-router";
-import axios from 'axios'
+import axios from "axios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import Nav from "../nav/nav";
-import Onboarding from "../onboarding/onboarding";
+import Onboarding from "../onboarding/clubOnboarding";
 import { API_URI } from "../../constants/api.url";
-import { toast } from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
 function LoginComp() {
   const [email, setEmail] = useState("");
@@ -28,18 +28,21 @@ function LoginComp() {
     };
     // console.log("data---", data);
     // setUser(data);
-    axios.post(`${API_URI}/users/login`, data)
-      .then(res => {
-        console.log("data---", res.data)
-        setUser(res.data.others)
-        Cookies.set('uid', res.data.uid)
-        Cookies.set('status', res.data.isComplete)
-        toast.success(`Login Successful`)
-        navigate('/')
-      }).catch(err => {
-        console.log(err)
-        toast.error(`Login Failed`)
+    axios
+      .post(`${API_URI}/users/login`, data)
+      .then((res) => {
+        console.log("data---", res.data);
+        setUser(res.data.others);
+        Cookies.set("uid", res.data.uid);
+        Cookies.set("status", res.data.isComplete);
+        Cookies.set("user", res.data.others.userType);
+        toast.success(`Login Successful`);
+        navigate("/dashboard");
       })
+      .catch((err) => {
+        console.log(err);
+        toast.error(`Login Failed`);
+      });
   };
 
   return (
@@ -85,8 +88,11 @@ function LoginComp() {
                   className="block mb-2 text-sm font-medium text-gray-900">
                   Designation
                 </label>
-                <select onChange={(e) => setDesignation(e.target.value)} id="designation" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                  <option value="student" >Student</option>
+                <select
+                  onChange={(e) => setDesignation(e.target.value)}
+                  id="designation"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                  <option value="student">Student</option>
                   <option value="faculty">Faculty</option>
                   <option value="club">Club</option>
                   <option value="hod">HOD</option>
@@ -135,8 +141,8 @@ function LoginComp() {
               <button
                 type="submit"
                 onClick={(e) => {
-                  e.preventDefault()
-                  handleLogin()
+                  e.preventDefault();
+                  handleLogin();
                   // setOnboaring(true);
                 }}
                 className="w-full text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -154,8 +160,6 @@ function LoginComp() {
           </div>
         </div>
       </section>
-
-
     </>
   );
 }

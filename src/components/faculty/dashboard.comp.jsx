@@ -14,8 +14,9 @@ import cn from "classnames";
 import { CgArrowDown, CgProfile, CgSpinner } from "react-icons/cg";
 import Links from "../student/Links";
 import { Club, Student } from "../utils/comman-components";
-
-function StudentComp() {
+import { useNavigate } from "react-router-dom";
+function FacultyComp() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     links: [
       {
@@ -80,7 +81,7 @@ function StudentComp() {
                   </h5>
                   <BsLaptopFill size={32} />
                 </a>
-                <button className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4">
+                <button className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4 " onClick={(e) => { e.preventDefault(); navigate("/facproj") }}>
                   Accepted{" "}
                   <span className="text-green-600 ml-2 font-extrabold">5</span>
                 </button>
@@ -95,7 +96,7 @@ function StudentComp() {
                   </h5>
                   <BsLaptopFill size={32} />
                 </a>
-                <button className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4">
+                <button className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4" onClick={(e) => { e.preventDefault(); navigate("/facppr") }}>
                   Accepted{" "}
                   <span className="text-green-600 ml-2 font-extrabold">5</span>
                 </button>
@@ -110,7 +111,7 @@ function StudentComp() {
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     Students
                   </h5>
-                  <button className="flex items-center gap-1">
+                  <button className="flex items-center gap-1" onClick={(e) => { e.preventDefault(); navigate("/facstud") }}>
                     View all <BsArrowRight />
                   </button>
                 </div>
@@ -145,4 +146,4 @@ function StudentComp() {
   );
 }
 
-export default StudentComp;
+export default FacultyComp;

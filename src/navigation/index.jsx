@@ -5,19 +5,28 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Onboarding from "../components/onboarding/onboarding";
+import StudentOnboarding from "../components/onboarding/studentOnboarding";
+import ClubOnboarding from "../components/onboarding/clubOnboarding";
+import FacultyOnboarding from "../components/onboarding/facultyOnboarding";
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../constants/route";
 
-
-function Navigation({ isLoggedIn, onBoarding }) {
+function Navigation({ isLoggedIn, onBoarding, user }) {
   console.log("onBoarding", onBoarding);
 
   return (
     <Router>
       {onBoarding ? (
         <Routes>
-          <Route path="*" element={<Onboarding />} />
+          {user?.userType === "club" && (
+            <Route path="*" element={<ClubOnboarding />} />
+          )}
+          {user?.userType === "faculty" && (
+            <Route path="*" element={<FacultyOnboarding />} />
+          )}
+          {user?.userType === "student" && (
+            <Route path="*" element={<StudentOnboarding />} />
+          )}
         </Routes>
       ) : (
         <Routes>
@@ -40,7 +49,7 @@ function Navigation({ isLoggedIn, onBoarding }) {
                 />
               );
             })}
-          {isLoggedIn && <Route path="*" element={<Navigate to="/" />} />}
+          {isLoggedIn && <Route path="*" element={<Navigate to="/dashboard" />} />}
           {!isLoggedIn && <Route path="*" element={<Navigate to="/login" />} />}
         </Routes>
       )}

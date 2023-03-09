@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Nav from "../nav/nav";
-import axios from "axios"
-import { toast } from "react-hot-toast"
+import axios from "axios";
+import { toast } from "react-hot-toast";
 import { API_URI } from "../../constants/api.url";
-import Onboarding from "../onboarding/onboarding";
+import Onboarding from "../onboarding/studentOnboarding";
 
 function SignupComp() {
   const [email, setEmail] = useState("");
@@ -17,26 +17,20 @@ function SignupComp() {
       email,
       userType: designation,
       password,
-      cnfPassword: cnfpassword
-    }
+      cnfPassword: cnfpassword,
+    };
 
-    console.log('data ---', data)
-    axios.post(`${API_URI}/users/register`, data)
-      .then(res => {
-        console.log(res.status)
-        if (res.status == 201) {
-          toast.success(res.data.status)
-          Navigate('/login')
-        } else {
-          toast(res.data.status, { icon: "⚠️" })
-        }
-      })
-
-  }
-
-
-
-
+    console.log("data ---", data);
+    axios.post(`${API_URI}/users/register`, data).then((res) => {
+      console.log(res.status);
+      if (res.status == 201) {
+        toast.success(res.data.status);
+        Navigate("/login");
+      } else {
+        toast(res.data.status, { icon: "⚠️" });
+      }
+    });
+  };
 
   return (
     <>
@@ -106,8 +100,11 @@ function SignupComp() {
                   className="block mb-2 text-sm font-medium text-gray-900">
                   Designation
                 </label>
-                <select onChange={(e) => setDesignation(e.target.value)} id="designation" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                  <option value="student" >Student</option>
+                <select
+                  onChange={(e) => setDesignation(e.target.value)}
+                  id="designation"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                  <option value="student">Student</option>
                   <option value="faculty">Faculty</option>
                   <option value="club">Club</option>
                   <option value="hod">HOD</option>
@@ -116,8 +113,8 @@ function SignupComp() {
               <button
                 type="submit"
                 onClick={(e) => {
-                  e.preventDefault()
-                  handleSignup()
+                  e.preventDefault();
+                  handleSignup();
                 }}
                 className="w-full text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 Sign Up

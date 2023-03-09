@@ -2,37 +2,35 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URI } from "../../constants/api.url";
 
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from 'redux'
-import { actionCreators } from '../../state';
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../state";
 
 import { useNavigate, Link } from "react-router-dom";
 
-import Cookies from 'js-cookie'
-function Onboarding() {
-  const user = useSelector(s => s.user)
+import Cookies from "js-cookie";
+function clubOnboarding() {
+  const user = useSelector((s) => s.user);
 
-  const [clubName, setClubName] = useState(null)
-  const [mentorTitle, setMentorTitle] = useState(null)
-  const [mentorName, setMentorName] = useState(null)
-  const [clubType, setClubType] = useState(null)
-  const [startingYear, setStartingYear] = useState(null)
-  const [dept, setDept] = useState(null)
-  const [deptHod, setdeptHod] = useState(null)
-  const [leadName, setLeadName] = useState(null)
-  const [leadPhoneNo, setLeadPhoneNo] = useState(null)
-  const [leadRegNo, setLeadRegNo] = useState(null)
-  const [clubEmail, setClubEmail] = useState(null)
-
+  const [clubName, setClubName] = useState(null);
+  const [mentorTitle, setMentorTitle] = useState(null);
+  const [mentorName, setMentorName] = useState(null);
+  const [clubType, setClubType] = useState(null);
+  const [startingYear, setStartingYear] = useState(null);
+  const [dept, setDept] = useState(null);
+  const [deptHod, setdeptHod] = useState(null);
+  const [leadName, setLeadName] = useState(null);
+  const [leadPhoneNo, setLeadPhoneNo] = useState(null);
+  const [leadRegNo, setLeadRegNo] = useState(null);
+  const [email, setEmail] = useState(null);
 
   useEffect(() => {
-    if (user)
-      setClubEmail(user.email)
-  }, [user])
+    if (user) setEmail(user.email);
+  }, [user]);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { setUser } = bindActionCreators(actionCreators, dispatch);
   const handleSubmit = () => {
@@ -47,38 +45,38 @@ function Onboarding() {
       leadName,
       leadPhoneNo,
       leadRegNo,
-      clubEmail,
-    }
-    console.log(data)
+      email,
+    };
+    console.log(data);
     toast.custom((t) => (
-      <span className='logoutToast'>
+      <span className="logoutToast">
         The changes are not reversible, are you sure?
-        <div className='toastbtns'>
-
-          <button className='classes.toastbtn'
+        <div className="toastbtns">
+          <button
+            className="classes.toastbtn"
             onClick={() => {
-              toast.dismiss(t.id)
-              const id = Cookies.get('uid')
-              axios.post(`${API_URI}/users/club/profile/${id}`, data)
-                .then(res => {
-                  console.log("data", res.data)
-                  setUser(res.data)
-                  Cookies.set('uid', res.data.uid)
-                  toast.success("Account details saved!")
-                  navigate('/')
-                }).catch(err => {
-                  console.log(err)
+              toast.dismiss(t.id);
+              const id = Cookies.get("uid");
+              axios
+                .put(`${API_URI}/users/profile/club/${id}`, data)
+                .then((res) => {
+                  console.log("data", res.data);
+                  setUser(res.data.profile);
+                  Cookies.set("uid", res.data.profile._id);
+                  toast.success("Account details saved!");
+                  navigate("/");
                 })
+                .catch((err) => {
+                  console.log(err);
+                });
             }}>
             OK
           </button>
-          <button onClick={() => toast.dismiss(t.id)}>
-            Dismiss
-          </button>
+          <button onClick={() => toast.dismiss(t.id)}>Dismiss</button>
         </div>
-      </span >
+      </span>
     ));
-  }
+  };
   return (
     <section className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a
@@ -147,8 +145,8 @@ function Onboarding() {
                 Club Email
               </label>
               <input
-                value={clubEmail}
-                onChange={(e) => setClubEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 name="email"
                 id="email"
@@ -278,12 +276,10 @@ function Onboarding() {
               />
             </div>
             <button
-              onClick={
-                (e) => {
-                  e.preventDefault();
-                  handleSubmit();
-                }
-              }
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
               type="submit"
               className="w-56 text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 col-span-2 text-center justify-self-center">
               Continue
@@ -295,4 +291,4 @@ function Onboarding() {
   );
 }
 
-export default Onboarding;
+export default clubOnboarding;

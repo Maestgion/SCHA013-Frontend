@@ -7,6 +7,7 @@ import FacultyProjectsComp from "../components/faculty/projects.comp";
 import FacultyComp from "../components/faculty/projects.comp";
 import FacultyResearchComp from "../components/faculty/research.comp";
 import StudentComp from "../components/student/student.comp";
+import FacultyOnboarding from "../components/onboarding/facultyOnboarding";
 
 function HomePage() {
   return (
@@ -14,13 +15,7 @@ function HomePage() {
       <Helmet>
         <title>SRM HUB | Home</title>
       </Helmet>
-      <ClubStudentsComp />
-      <FacultyDashboardComp />
-      <FacultyStudentsComp />
-      <FacultyProjectsComp />
-      <FacultyComp />
-      <FacultyResearchComp />
-      <StudentComp />
+      <FacultyOnboarding />
     </>
   );
 }
