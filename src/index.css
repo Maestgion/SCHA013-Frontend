@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  isolation: isolate;
+  height: 100%;
+}
+
+.spinner {
+  animation: spin 1s infinite ease-in-out;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.sec-active {
+  border-bottom: 2.4px solid white;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}

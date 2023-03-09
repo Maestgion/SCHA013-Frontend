@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import HomeComp from "../components/Home/home.comp";
+import FacultyComp from "../components/faculty/faculty.comp";
+import StudentComp from "../components/student/student.comp";
 
 function HomePage() {
   return (
@@ -8,7 +9,8 @@ function HomePage() {
       <Helmet>
         <title>SRM HUB | Home</title>
       </Helmet>
-      <HomeComp />
+      <StudentComp />
+      <FacultyComp />
     </>
   );
 }

@@ -1,7 +1,9 @@
-import React from "react";
-
 function HomeComp() {
-  return <div>HomeComp</div>;
+  return (
+    <div>
+      <h1>This is HomeComp</h1>
+    </div>
+  );
 }
 
 export default HomeComp;
