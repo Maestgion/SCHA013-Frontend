@@ -217,8 +217,8 @@ function ClubStudentsComp() {
         {selectedIndex == 1 && (
           <div className="flex h-[80%] w-full gap-40">
             <div className="flex justify-evenly w-full">
-              <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900">
+              <div className="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow">
+                <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
                   Received requests
                 </h5>
                 {tempArr.length > 0 ? (
@@ -249,8 +249,8 @@ function ClubStudentsComp() {
                   </div>
                 )}
               </div>
-              <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow">
-                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900">
+              <div className="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow">
+                <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
                   Request status
                 </h5>
                 {tempArr.length > 0 ? (
