@@ -1,40 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillHome, AiFillTrophy, AiOutlineTeam } from "react-icons/ai";
 import { BsBellFill, BsLaptopFill, BsSearch } from "react-icons/bs";
 import { CgComment, CgMenuGridR, CgProfile, CgSpinner } from "react-icons/cg";
 import cn from "classnames";
 import { Ongoing, Previous } from "../utils/comman-components";
+import { API_URI } from "../../constants/api.url";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function FacultyProjectsComp() {
+  const [solution, setSolution] = useState("")
+  const [title, setTitle] = useState("")
+  const [problemStatement, setProblemStatement] = useState("")
+  const handlePost = () => {
+    const data = {
+      projectTitle: title,
+      problemStatement,
+      solution
+    }
+    console.log(data)
+    axios.post(`${API_URI}/projects/newProject`, data).then(res => {
+      toast.success("Project posted successfully")
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+
+    })
+  };
+
+
   const [data, setData] = useState({
     ongoing: [
       {
-        title: "Noteworthy technology acquisitions 2021",
-        description:
+        projectTitle: "Noteworthy technology acquisitions 2021",
+        problemStatement:
           "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
         link: "#",
       },
       {
-        title: "Noteworthy technology acquisitions 2021",
-        description:
+        projectTitle: "Noteworthy technology acquisitions 2021",
+        problemStatement:
           "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
         link: "#",
       },
     ],
     previous: [
       {
-        title:
+        projectTitle:
           "Sentry's Postman collection will allow you to get familiar and work with the...",
-        description:
+        problemStatement:
           "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
         link: "#",
         feedback: "No uniqueness in the given idea. Think something new.",
         timeStamp: 1678204526107,
       },
       {
-        title:
+        projectTitle:
           "Sentry's Postman collection will allow you to get familiar and work with the...",
-        description:
+        problemStatement:
           "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
         link: "#",
         feedback: "No uniqueness in the given idea. Think something new.",
@@ -46,6 +69,36 @@ function FacultyProjectsComp() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const greeting = new Date().getHours() > 12 ? "evening" : "morning";
+
+
+  useEffect(() => {
+    axios.get(`${API_URI}/projects/newProject`).then((res) => {
+      console.log(res.data);
+      res.data.map((item) => {
+        if (item.onGoing) {
+          data.ongoing.push(item);
+        } else {
+          data.previous.push(item);
+        }
+      });
+      // setData(res.data);
+      setLoading(false);
+
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   axios.get(`${API_URI}/projects/specific?ongoing=true`).then((res) => {
+  //     console.log(res.data);
+  //     res.data.map((item) => {
+  //       data.ongoing.push(item);
+  //     });
+
+  //     // setData(res.data);
+  //     setLoading(false);
+
+  //   });
+  // }, []);
 
   new Promise((resolve) => {
     setTimeout(() => {
@@ -129,11 +182,14 @@ function FacultyProjectsComp() {
               <div className="space-y-8 flex flex-col">
                 <div>
                   <label
+
                     htmlFor="first_name"
                     className="block mb-2 text-sm font-medium text-gray-900">
                     Title
                   </label>
                   <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     type="text"
                     id="first_name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:ring-1 focus:border-orange-500 block w-full p-2.5 outline-none"
@@ -148,6 +204,8 @@ function FacultyProjectsComp() {
                     Problem Statement
                   </label>
                   <textarea
+                    value={problemStatement}
+                    onChange={(e) => setProblemStatement(e.target.value)}
                     id="message"
                     rows="6"
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:ring-1 focus:border-orange-500 outline-none"
@@ -160,6 +218,8 @@ function FacultyProjectsComp() {
                     Solution
                   </label>
                   <textarea
+                    value={solution}
+                    onChange={(e) => setSolution(e.target.value)}
                     id="message"
                     rows="6"
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:ring-1 focus:border-orange-500 outline-none"
@@ -167,20 +227,20 @@ function FacultyProjectsComp() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-500 rounded-lg focus:ring-4 focus:ring-orange-300 hover:bg-orange-600 ml-auto shadow">
-                  Publish post
+                  className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-500 rounded-lg focus:ring-4 focus:ring-orange-300 hover:bg-orange-600 ml-auto shadow" onClick={(e) => { e.preventDefault(); handlePost() }}>
+                  Submit
                 </button>
               </div>
             )}
             {selectedIndex == 1 && (
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-6 h-[80%] overflow-scroll">
                 {data.ongoing.map((ongoing, i) => (
                   <Ongoing key={i} ongoing={ongoing} />
                 ))}
               </div>
             )}
             {selectedIndex == 2 && (
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 h-[80%] overflow-scroll">
                 {data.previous.map((previous, i) => (
                   <Previous key={i} previous={previous} />
                 ))}

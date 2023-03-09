@@ -1,9 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import AnnouncementComp from "../components/dept/announcement.comp";
-import DeptDashComp from "../components/dept/dashboard.comp";
-import FacultiesComp from "../components/dept/faculties.comp";
-import ProjectReqComp from "../components/dept/projectreq.comp";
+import LoginComp from "../components/login/login.comp";
+import Onboarding from "../components/onboarding/clubOnboarding";
 
 function LoginPage() {
   return (
@@ -11,8 +9,7 @@ function LoginPage() {
       <Helmet>
         <title>SRM HUB | login</title>
       </Helmet>
-      <DeptDashComp />
-      <FacultiesComp />
+      <LoginComp />
     </>
   );
 }

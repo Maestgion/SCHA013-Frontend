@@ -36,6 +36,7 @@ function LoginComp() {
         Cookies.set("uid", res.data.uid);
         Cookies.set("status", res.data.isComplete);
         Cookies.set("user", res.data.others.userType);
+        Cookies.set("token", res.data.others.tokens[res.data.others.tokens.length - 1].token);
         toast.success(`Login Successful`);
         navigate("/dashboard");
       })
@@ -49,7 +50,16 @@ function LoginComp() {
     <>
       <Nav signup />
 
-      <section className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-4">
+      <section className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a
+          href="#"
+          className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+          <img
+            className="w-20 mr-2"
+            src="/assets/srmhub.orange.svg"
+            alt="logo"
+          />
+        </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">

@@ -170,7 +170,7 @@ function FacultyResearchComp() {
                           {previous?.timeStamp}
                         </p>
                       </div>
-                      <div className="flex flex-col justify-between p-4 leading-normal">
+                      <div className="flex flex-col justify-between p-4 leading-normal w-full">
                         <div>
                           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-16 overflow-hidden overflow-ellipsis">
                             {previous?.title}

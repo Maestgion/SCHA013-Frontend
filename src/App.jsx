@@ -27,7 +27,7 @@ const App = () => {
     if (uid != null) {
       if (Cookies.get("user") === "club") {
         axios
-          .get(`${API_URI}/users/club/single/${uid}`)
+          .get(`${API_URI}/users/single/club/${uid}`)
           .then((res) => {
             console.log("user data", res.data);
             setUser(res.data);
@@ -37,7 +37,7 @@ const App = () => {
           });
       } else if (Cookies.get("user") === "student") {
         axios
-          .get(`${API_URI}/users/student/single/${uid}`)
+          .get(`${API_URI}/users/single/student${uid}`)
           .then((res) => {
             console.log("user data", res.data);
             setUser(res.data);
@@ -47,7 +47,7 @@ const App = () => {
           });
       } else {
         axios
-          .get(`${API_URI}/users/faculty/single/${uid}`)
+          .get(`${API_URI}/users/single/faculty/${uid}`)
           .then((res) => {
             console.log("user data", res.data);
             setUser(res.data);
