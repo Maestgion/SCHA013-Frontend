@@ -1,7 +1,8 @@
+import { data } from "autoprefixer";
 import cn from "classnames";
 import { useState } from "react";
 import { AiOutlineTeam } from "react-icons/ai";
-import { CgComment } from "react-icons/cg";
+import { CgComment, CgKey } from "react-icons/cg";
 import DetailsPopover from "../popover/details.popover";
 import StudentPopover from "../popover/student.popover";
 import TeamsPopover from "../popover/teams.popover";
@@ -80,13 +81,19 @@ export function Ongoing({ ongoing }) {
   return (
     <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow flex flex-col">
       <TeamsPopover shown={teamShown} setShown={setTeamShown} />
-      <DetailsPopover shown={detailShown} setShown={setDetailShown} />
+      <DetailsPopover
+        shown={detailShown}
+        data={ongoing}
+        setShown={setDetailShown}
+      />
       <a href="#">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           {ongoing?.projectTitle}
         </h5>
       </a>
-      <p className="mb-3 font-normal text-gray-700">{ongoing?.problemStatement}</p>
+      <p className="mb-3 font-normal text-gray-700">
+        {ongoing?.problemStatement}
+      </p>
       <div className="flex gap-4 ml-auto">
         <button
           onClick={() => setTeamShown(true)}
@@ -109,9 +116,15 @@ export function Previous({ previous }) {
   return (
     <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-3xl hover:bg-gray-100 h-52">
       <TeamsPopover shown={teamShown} setShown={setTeamShown} />
-      <DetailsPopover shown={detailShown} setShown={setDetailShown} />
+      <DetailsPopover
+        shown={detailShown}
+        setShown={setDetailShown}
+        data={previous}
+      />
       <div className="w-full rounded-t-lg h-96 md:h-auto md:w-2/5 md:rounded-none md:rounded-l-lg p-4 justify-between flex flex-col">
-        <p className="mb-3 font-normal text-gray-700">No uniqueness in the given idea. Think something new.</p>
+        <p className="mb-3 font-normal text-gray-700">
+          No uniqueness in the given idea. Think something new.
+        </p>
         <p className="mb-3 font-normal text-gray-700">1678204526107</p>
       </div>
       <div className="flex flex-col justify-between p-4 leading-normal w-full">

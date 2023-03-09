@@ -1,11 +1,10 @@
 import cn from "classnames";
 import { useState } from "react";
-import { BsCheck2, BsFileText, BsX } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
-import { Student } from "../utils/comman-components";
+import { BsX } from "react-icons/bs";
 
 function DetailsPopover({ shown, setShown, data }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  console.log(data);
   return (
     <div
       className={cn(
@@ -32,7 +31,7 @@ function DetailsPopover({ shown, setShown, data }) {
               type="text"
               id="first_name"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:ring-1 focus:border-orange-500 block w-full p-2.5 outline-none"
-              placeholder="Title"
+              placeholder={data?.projectTitle}
               disabled
             />
           </div>
@@ -46,7 +45,7 @@ function DetailsPopover({ shown, setShown, data }) {
               id="message"
               rows="5"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:ring-1 focus:border-orange-500 outline-none"
-              placeholder="Write your problem statement"
+              placeholder={data?.problemStatement}
               disabled></textarea>
           </div>
           <div>
