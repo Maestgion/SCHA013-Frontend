@@ -4,7 +4,7 @@ import { BsBellFill, BsLaptopFill, BsSearch } from "react-icons/bs";
 import { CgMenuGridR, CgProfile, CgSpinner } from "react-icons/cg";
 import cn from "classnames";
 
-function FacultyComp() {
+function FacultyResearchComp() {
   const [data, setData] = useState({
     ongoing: [
       {
@@ -63,7 +63,7 @@ function FacultyComp() {
 
   return (
     <div className="px-5 py-3 flex gap-4 h-full">
-      <nav className="bg-[#FC8019] rounded-3xl px-2 py-6 flex flex-col gap-20 fill-white text-white items-center h-full">
+      <nav className="bg-orange-500 rounded-3xl px-2 py-6 flex flex-col gap-20 fill-white text-white items-center h-full">
         <div id="logo">
           <a href="/">
             <svg
@@ -105,12 +105,12 @@ function FacultyComp() {
               Good {greeting}, Renuka Devi!
             </h1>
 
-            <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
-              <ul class="flex flex-wrap -mb-px">
-                {["New", "Ongoing", "Previous"].map((tab, index) => {
+            <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
+              <ul className="flex flex-wrap -mb-px">
+                {["Ongoing", "Previous"].map((tab, index) => {
                   return (
                     <button
-                      class={cn(
+                      className={cn(
                         "inline-block p-4 rounded-t-lg active mr-2 border-b-2",
                         selectedIndex === index
                           ? "text-orange-600 border-orange-600"
@@ -124,72 +124,25 @@ function FacultyComp() {
               </ul>
             </div>
             {selectedIndex == 0 && (
-              <div className="space-y-8 flex flex-col">
-                <div>
-                  <label
-                    htmlFor="first_name"
-                    class="block mb-2 text-sm font-medium text-gray-900">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:ring-1 focus:border-orange-500 block w-full p-2.5 outline-none"
-                    placeholder="Title"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    for="message"
-                    class="block mb-2 text-sm font-medium text-gray-900">
-                    Problem Statement
-                  </label>
-                  <textarea
-                    id="message"
-                    rows="6"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:ring-1 focus:border-orange-500 outline-none"
-                    placeholder="Write your problem statement"></textarea>
-                </div>
-                <div>
-                  <label
-                    for="message"
-                    class="block mb-2 text-sm font-medium text-gray-900">
-                    Solution
-                  </label>
-                  <textarea
-                    id="message"
-                    rows="6"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:ring-1 focus:border-orange-500 outline-none"
-                    placeholder="Propose your solution"></textarea>
-                </div>
-                <button
-                  type="submit"
-                  class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-500 rounded-lg focus:ring-1 focus:ring-slate-900 dark:focus:ring-orange-600 hover:bg-orange-600 ml-auto">
-                  Publish post
-                </button>
-              </div>
-            )}
-            {selectedIndex == 1 && (
               <div className="grid grid-cols-2 gap-6">
                 {data.ongoing.map((ongoing) => {
                   return (
-                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
                       <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                           {ongoing?.title}
                         </h5>
                       </a>
-                      <p class="mb-3 font-normal text-gray-700">
+                      <p className="mb-3 font-normal text-gray-700">
                         {ongoing?.description}
                       </p>
                       <a
                         href={ongoing?.link}
-                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300">
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300">
                         Read more
                         <svg
                           aria-hidden="true"
-                          class="w-4 h-4 ml-2 -mr-1"
+                          className="w-4 h-4 ml-2 -mr-1"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg">
@@ -204,36 +157,36 @@ function FacultyComp() {
                 })}
               </div>
             )}
-            {selectedIndex == 2 && (
+            {selectedIndex == 1 && (
               <div className="flex flex-col gap-6">
                 {data.previous.map((previous) => {
                   return (
-                    <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-3xl hover:bg-gray-100 h-52">
-                      <div class="w-full rounded-t-lg h-96 md:h-auto md:w-2/5 md:rounded-none md:rounded-l-lg p-4 justify-between flex flex-col">
-                        <p class="mb-3 font-normal text-gray-700">
+                    <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-3xl hover:bg-gray-100 h-52">
+                      <div className="w-full rounded-t-lg h-96 md:h-auto md:w-2/5 md:rounded-none md:rounded-l-lg p-4 justify-between flex flex-col">
+                        <p className="mb-3 font-normal text-gray-700">
                           {previous?.feedback}
                         </p>
-                        <p class="mb-3 font-normal text-gray-700">
+                        <p className="mb-3 font-normal text-gray-700">
                           {previous?.timeStamp}
                         </p>
                       </div>
-                      <div class="flex flex-col justify-between p-4 leading-normal">
+                      <div className="flex flex-col justify-between p-4 leading-normal">
                         <div>
-                          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-16 overflow-hidden overflow-ellipsis">
+                          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-16 overflow-hidden overflow-ellipsis">
                             {previous?.title}
                           </h5>
-                          <p class="mb-3 font-normal text-gray-700">
+                          <p className="mb-3 font-normal text-gray-700">
                             {previous?.description}
                           </p>
                         </div>
                         <div className="flex justify-between">
                           <a
                             href={previous?.link}
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300">
+                            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300">
                             Read more
                             <svg
                               aria-hidden="true"
-                              class="w-4 h-4 ml-2 -mr-1"
+                              className="w-4 h-4 ml-2 -mr-1"
                               fill="currentColor"
                               viewBox="0 0 20 20"
                               xmlns="http://www.w3.org/2000/svg">
@@ -262,4 +215,4 @@ function FacultyComp() {
   );
 }
 
-export default FacultyComp;
+export default FacultyResearchComp;

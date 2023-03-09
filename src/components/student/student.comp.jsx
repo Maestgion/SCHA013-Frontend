@@ -75,7 +75,7 @@ function StudentComp() {
 
   return (
     <div className="px-5 py-3 flex gap-4 h-full">
-      <nav className="bg-[#FC8019] rounded-3xl px-2 py-6 flex flex-col gap-20 fill-white text-white items-center h-full">
+      <nav className="bg-orange-500 rounded-3xl px-2 py-6 flex flex-col gap-20 fill-white text-white items-center h-full">
         <div id="logo">
           <a href="/">
             <img
@@ -123,7 +123,7 @@ function StudentComp() {
               return <Post post={post} key={index} />;
             })}
           </div>
-          <div className="w-[40%] flex flex-col items-end gap-6 overflow-scroll scrollbar-hidden">
+          <div className="w-96 flex flex-col items-end gap-6 overflow-scroll scrollbar-hidden">
             {data.links.map((link, index) => {
               return <Links link={link} key={index} />;
             })}

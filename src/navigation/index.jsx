@@ -5,9 +5,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Onboarding from "../components/onboarding/onboarding";
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../constants/route";
-import HomePage from "../pages/home.page";
+
 
 function Navigation({ isLoggedIn, onBoarding }) {
   console.log("onBoarding", onBoarding);
@@ -16,7 +17,7 @@ function Navigation({ isLoggedIn, onBoarding }) {
     <Router>
       {onBoarding ? (
         <Routes>
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<Onboarding />} />
         </Routes>
       ) : (
         <Routes>
