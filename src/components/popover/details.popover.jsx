@@ -1,8 +1,26 @@
 import cn from "classnames";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { BsX } from "react-icons/bs";
-
+import { API_URI } from "../../constants/api.url";
+import axios from "axios";
 function DetailsPopover({ shown, setShown, data }) {
+  const [requirements, setRequirements] = useState("");
+  const handleSubmit = () => {
+    console.log("hi")
+
+    const dataX = {
+
+      criteria: requirements,
+      projectTitle: data?.projectTitle,
+      problemStatement: data?.problemStatement,
+    }
+    axios.post(`${API_URI}/projects/newProject/recruitment`, dataX).then((res) => {
+      toast.success("Post added successfully")
+      console.log(res);
+    });
+
+  };
   const [selectedIndex, setSelectedIndex] = useState(0);
   console.log(data);
   return (
@@ -55,12 +73,15 @@ function DetailsPopover({ shown, setShown, data }) {
               Requirements
             </label>
             <textarea
+              onChange={(e) => setRequirements(e.target.value)}
+              value={requirements}
               id="message"
               rows="6"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:ring-1 focus:border-orange-500 outline-none"
               placeholder="Requirements"></textarea>
           </div>
           <button
+            onClick={(e) => { e.preventDefault(); handleSubmit() }}
             type="submit"
             className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-500 rounded-lg focus:ring-4 focus:ring-orange-300 hover:bg-orange-600 ml-auto shadow">
             Post
