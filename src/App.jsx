@@ -102,7 +102,7 @@ const App = () => {
       setIsLoggedIn(false);
       setIsOnBoarding(false);
     }
-    console.log(state)
+    console.log(state);
   }, [state]);
 
   return (

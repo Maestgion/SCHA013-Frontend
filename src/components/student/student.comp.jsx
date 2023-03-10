@@ -12,62 +12,63 @@ import { useNavigate } from "react-router-dom";
 function StudentComp() {
   const navigate = useNavigate();
 
-  const [data, setData] = useState({
-    posts: [
-      {
-        author: "srmkzilla",
-        profileUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
-        imageUrl: "/assets/mozofest.jpg",
-        description:
-          "Awww, you didn’t think we’d leave you on read, right? We know how y’all have been missing us all these lonely, eventless nights ;)Well, guess what, we’re back with MOZOFEST ’23! So, you up? 👀🔥Coming at you better than ever, enter the Mozoverse once again and lose yourself in our incredible events and spectacles:1. Shore of Mystery - For the ones who always figure it out before Sherlock2. Rush hour - Tick tick boom, we’re bringin the noise…3. Strikeout - Shoot first, ask questions later4. Quibble - May the dice ever be in your favour5. Ca(t)che the code - Read the code faster than Neo, win your team the roundFollow us and stay tuned in for more registration details and event revelations. Crack your fingers, roll your neck, and get ready to make some core memories! Link in bio 🔗#mozo #mozofest #mozilla #srm #events #technical #nontechnical #students",
-      },
-      {
-        author: "srmkzilla",
-        profileUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
-        imageUrl: "/assets/mozofest.jpg",
-        description:
-          "Awww, you didn’t think we’d leave you on read, right? We know how y’all have been missing us all these lonely, eventless nights ;)Well, guess what, we’re back with MOZOFEST ’23! So, you up? 👀🔥Coming at you better than ever, enter the Mozoverse once again and lose yourself in our incredible events and spectacles:1. Shore of Mystery - For the ones who always figure it out before Sherlock2. Rush hour - Tick tick boom, we’re bringin the noise…3. Strikeout - Shoot first, ask questions later4. Quibble - May the dice ever be in your favour5. Ca(t)che the code - Read the code faster than Neo, win your team the roundFollow us and stay tuned in for more registration details and event revelations. Crack your fingers, roll your neck, and get ready to make some core memories! Link in bio 🔗#mozo #mozofest #mozilla #srm #events #technical #nontechnical #students",
-      },
-      {
-        author: "srmkzilla",
-        profileUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
-        imageUrl: "/assets/mozofest.jpg",
-        description:
-          "Awww, you didn’t think we’d leave you on read, right? We know how y’all have been missing us all these lonely, eventless nights ;)Well, guess what, we’re back with MOZOFEST ’23! So, you up? 👀🔥Coming at you better than ever, enter the Mozoverse once again and lose yourself in our incredible events and spectacles:1. Shore of Mystery - For the ones who always figure it out before Sherlock2. Rush hour - Tick tick boom, we’re bringin the noise…3. Strikeout - Shoot first, ask questions later4. Quibble - May the dice ever be in your favour5. Ca(t)che the code - Read the code faster than Neo, win your team the roundFollow us and stay tuned in for more registration details and event revelations. Crack your fingers, roll your neck, and get ready to make some core memories! Link in bio 🔗#mozo #mozofest #mozilla #srm #events #technical #nontechnical #students",
-      },
-    ],
-    links: [
-      {
-        title: "16 hours free training program on CRT",
-        description:
-          "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
-      },
-      {
-        title: "16 hours free training program on CRT",
-        description:
-          "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
-      },
-      {
-        title: "16 hours free training program on CRT",
-        description:
-          "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
-      },
-      {
-        title: "16 hours free training program on CRT",
-        description:
-          "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
-      },
-    ],
-  });
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   const greeting = new Date().getHours() > 12 ? "evening" : "morning";
 
   useEffect(() => {
-    axios.get(`${API_URI}/posts`).then((res) => {
-      console.log(res.data);
+    axios.get(`${API_URI}/posts/all`).then((res) => {
+      const result = res.data.map((d) => {
+        return {
+          author: "codingninja",
+          profileUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
+          imageUrl: d.img,
+          description: d.desc,
+        };
+      });
+      setData((data) => {
+        const re = {
+          posts: [
+            {
+              author: "srmkzilla",
+              profileUrl:
+                "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
+              imageUrl: "/assets/mozofest.jpg",
+              description:
+                "Awww, you didn’t think we’d leave you on read, right? We know how y’all have been missing us all these lonely, eventless nights ;)Well, guess what, we’re back with MOZOFEST ’23! So, you up? 👀🔥Coming at you better than ever, enter the Mozoverse once again and lose yourself in our incredible events and spectacles:1. Shore of Mystery - For the ones who always figure it out before Sherlock2. Rush hour - Tick tick boom, we’re bringin the noise…3. Strikeout - Shoot first, ask questions later4. Quibble - May the dice ever be in your favour5. Ca(t)che the code - Read the code faster than Neo, win your team the roundFollow us and stay tuned in for more registration details and event revelations. Crack your fingers, roll your neck, and get ready to make some core memories! Link in bio 🔗#mozo #mozofest #mozilla #srm #events #technical #nontechnical #students",
+            },
+            ...result,
+          ],
+          links: [
+            {
+              title: "16 hours free training program on CRT",
+              description:
+                "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
+            },
+            {
+              title: "16 hours free training program on CRT",
+              description:
+                "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
+            },
+            {
+              title: "16 hours free training program on CRT",
+              description:
+                "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
+            },
+            {
+              title: "16 hours free training program on CRT",
+              description:
+                "Department of Networking and Communications in collaboration with our MoU partner ExcelR Solution, happy to announce 16 hours free training program on Campus Recruitment Training (CRT) -Interview success with verbal ability and logical reasoning",
+            },
+          ],
+        };
+        console.log(re);
+        return re;
+      });
     });
   }, []);
+
   new Promise((resolve) => {
     setTimeout(() => {
       setLoading(false);
@@ -107,8 +108,12 @@ function StudentComp() {
             </Link>
           </div>
           <div>
-            <a href="" onClick={(e) => { e.preventDefault(); navigate("/stdproj") }}>
-
+            <a
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/stdproj");
+              }}>
               <BsLaptopFill size={32} />
             </a>
           </div>

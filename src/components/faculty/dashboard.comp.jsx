@@ -1,17 +1,13 @@
 import { useState } from "react";
 import {
-  BsArrowBarUp,
-  BsArrowDown,
-  BsArrowDownCircle,
-  BsArrowDownShort,
-  BsArrowDownUp,
   BsArrowRight,
   BsBellFill,
+  BsFilePost,
   BsLaptopFill,
+  BsPlus,
   BsSearch,
 } from "react-icons/bs";
-import cn from "classnames";
-import { CgArrowDown, CgProfile, CgSpinner } from "react-icons/cg";
+import { CgAdd, CgProfile, CgSpinner } from "react-icons/cg";
 import Links from "../student/Links";
 import { Club, Student } from "../utils/comman-components";
 import { useNavigate } from "react-router-dom";
@@ -64,8 +60,13 @@ function FacultyComp() {
     <div className="px-5 py-3 flex gap-4 h-full">
       <section className="flex-1 px-8 py-4 space-y-6">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-medium">Good {greeting}, Anishka!</h1>
-          <div className="flex gap-6">
+          <h1 className="text-2xl font-medium">
+            Good {greeting}, Renuka Devi!
+          </h1>
+          <div className="flex items-center gap-6">
+            <button onClick={() => navigate("/post")}>
+              <BsPlus size={40} />
+            </button>
             <BsSearch size={24} />
             <BsBellFill size={24} />
             <CgProfile size={24} />
@@ -81,7 +82,12 @@ function FacultyComp() {
                   </h5>
                   <BsLaptopFill size={32} />
                 </a>
-                <button className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4 " onClick={(e) => { e.preventDefault(); navigate("/facproj") }}>
+                <button
+                  className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4 "
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/facproj");
+                  }}>
                   Accepted{" "}
                   <span className="text-green-600 ml-2 font-extrabold">5</span>
                 </button>
@@ -96,7 +102,12 @@ function FacultyComp() {
                   </h5>
                   <BsLaptopFill size={32} />
                 </a>
-                <button className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4" onClick={(e) => { e.preventDefault(); navigate("/facppr") }}>
+                <button
+                  className="inline-flex items-center px-4 py-2 text-sm font-semibold text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 mr-4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/facppr");
+                  }}>
                   Accepted{" "}
                   <span className="text-green-600 ml-2 font-extrabold">5</span>
                 </button>
@@ -111,7 +122,12 @@ function FacultyComp() {
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     Students
                   </h5>
-                  <button className="flex items-center gap-1" onClick={(e) => { e.preventDefault(); navigate("/facstud") }}>
+                  <button
+                    className="flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate("/facstud");
+                    }}>
                     View all <BsArrowRight />
                   </button>
                 </div>
