@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiFillHome, AiFillTrophy } from "react-icons/ai";
 import { BsBellFill, BsLaptopFill, BsSearch } from "react-icons/bs";
 import { CgMenuGridR, CgProfile, CgSpinner } from "react-icons/cg";
+import { API_URI } from "../../constants/api.url";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Links from "./Links";
 import Post from "./Post";
-
+import { useNavigate } from "react-router-dom";
 function StudentComp() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     posts: [
       {
@@ -58,6 +63,11 @@ function StudentComp() {
 
   const greeting = new Date().getHours() > 12 ? "evening" : "morning";
 
+  useEffect(() => {
+    axios.get(`${API_URI}/posts`).then((res) => {
+      console.log(res.data);
+    });
+  }, []);
   new Promise((resolve) => {
     setTimeout(() => {
       setLoading(false);
@@ -92,12 +102,13 @@ function StudentComp() {
             </a>
           </div>
           <div>
-            <a href="">
+            <Link to={"/stdachiev"}>
               <AiFillTrophy size={32} />
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="">
+            <a href="" onClick={(e) => { e.preventDefault(); navigate("/stdproj") }}>
+
               <BsLaptopFill size={32} />
             </a>
           </div>

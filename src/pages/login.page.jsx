@@ -12,9 +12,9 @@ function LoginPage() {
       <Helmet>
         <title>SRM HUB | login</title>
       </Helmet>
-      <FacultyProjectsComp />
+      {/* <FacultyProjectsComp /> */}
       {/* <ClubDashComp /> */}
-      {/* <LoginComp /> */}
+      <LoginComp />
     </>
   );
 }

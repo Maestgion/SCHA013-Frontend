@@ -6,6 +6,8 @@ import FacultyProjectsComp from "../components/faculty/projects.comp";
 import FacultyResearchComp from "../components/faculty/research.comp";
 import HomeComp from "../components/home/home.comp";
 import Onboarding from "../components/onboarding/studentOnboarding";
+import NewAchievementComp from "../components/student/newAchievement.comp";
+import ProposalsComp from "../components/student/proposals.comp";
 import StudentComp from "../components/student/student.comp";
 import LoginPage from "../pages/login.page";
 import SignupPage from "../pages/signup.Page";
@@ -27,6 +29,14 @@ export const PRIVATE_ROUTES = [
   {
     path: "/facppr",
     component: <FacultyResearchComp />
+  },
+  {
+    path: "/stdproj",
+    component: <ProposalsComp />
+  },
+  {
+    path: "/stdachiev",
+    component: <NewAchievementComp />
   }
 ];
 export const PUBLIC_ROUTES = [

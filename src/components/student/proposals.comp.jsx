@@ -1,51 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillHome, AiFillTrophy } from "react-icons/ai";
 import { BsBellFill, BsLaptopFill, BsSearch } from "react-icons/bs";
 import { CgMenuGridR, CgProfile, CgSpinner } from "react-icons/cg";
 import ProposalPopover from "../popover/proposal.popover";
 import StudentPopover from "../popover/student.popover";
+import { API_URI } from "../../constants/api.url";
+import axios from "axios";
 
 const reader = new FileReader();
 
 function ProposalsComp() {
   const [data, setData] = useState({
     post: [
-      {
-        imageUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
-        facultyName: "Renuka Devi",
-        proposalTitle:
-          "The urgent requirement of cleaning the unclean college premises",
-        proposalDescription:
-          "When I was at Google I worked with a lot of designers, and i’ve been very impressed by humbleteam.",
-        proposalRequirements: `Open for all 3rd year students,
-        Web Developer - MERN
-        AI/ML - NLP
-        App Developer - Flutter`,
-      },
-      {
-        imageUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
-        facultyName: "Renuka Devi",
-        proposalTitle:
-          "The urgent requirement of cleaning the unclean college premises",
-        proposalDescription:
-          "When I was at Google I worked with a lot of designers, and i’ve been very impressed by humbleteam.",
-        proposalRequirements: `Open for all 3rd year students,
-        Web Developer - MERN
-        AI/ML - NLP
-        App Developer - Flutter`,
-      },
-      {
-        imageUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
-        facultyName: "Renuka Devi",
-        proposalTitle:
-          "The urgent requirement of cleaning the unclean college premises",
-        proposalDescription:
-          "When I was at Google I worked with a lot of designers, and i’ve been very impressed by humbleteam.",
-        proposalRequirements: `Open for all 3rd year students,
-        Web Developer - MERN
-        AI/ML - NLP
-        App Developer - Flutter`,
-      },
+      // {
+      //   imageUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
+      //   facultyName: "Renuka Devi",
+      //   proposalTitle:
+      //     "The urgent requirement of cleaning the unclean college premises",
+      //   proposalDescription:
+      //     "When I was at Google I worked with a lot of designers, and i’ve been very impressed by humbleteam.",
+      //   proposalRequirements: `Open for all 3rd year students,
+      //   Web Developer - MERN
+      //   AI/ML - NLP
+      //   App Developer - Flutter`,
+      // },
+      // {
+      //   imageUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
+      //   facultyName: "Renuka Devi",
+      //   proposalTitle:
+      //     "The urgent requirement of cleaning the unclean college premises",
+      //   proposalDescription:
+      //     "When I was at Google I worked with a lot of designers, and i’ve been very impressed by humbleteam.",
+      //   proposalRequirements: `Open for all 3rd year students,
+      //   Web Developer - MERN
+      //   AI/ML - NLP
+      //   App Developer - Flutter`,
+      // },
+      // {
+      //   imageUrl: "https://mozofest.srmkzilla.net/assets/mozofest-icon.svg",
+      //   facultyName: "Renuka Devi",
+      //   proposalTitle:
+      //     "The urgent requirement of cleaning the unclean college premises",
+      //   proposalDescription:
+      //     "When I was at Google I worked with a lot of designers, and i’ve been very impressed by humbleteam.",
+      //   proposalRequirements: `Open for all 3rd year students,
+      //   Web Developer - MERN
+      //   AI/ML - NLP
+      //   App Developer - Flutter`,
+      // },
     ],
   });
   const [loading, setLoading] = useState(true);
@@ -56,6 +58,18 @@ function ProposalsComp() {
 
   const greeting = new Date().getHours() > 12 ? "evening" : "morning";
 
+  useEffect(() => {
+    axios.get(`${API_URI}/projects/allProject`).then((res) => {
+      res.data.map((item) => {
+        if (item.criteria) {
+          data.post.push(item)
+        }
+        console.log(data)
+        console.log(res.data);
+        // setData(res.data);
+      });
+    });
+  }, []);
   new Promise((resolve) => {
     setTimeout(() => {
       setLoading(false);
@@ -123,24 +137,20 @@ function ProposalsComp() {
                 return (
                   <div key={i} className="space-y-4 w-96">
                     <div className="flex gap-2 items-center">
-                      <img
-                        src={post?.imageUrl}
-                        alt={post?.facultyName}
-                        className="h-6"
-                      />
+
                       <p className="text-lg font-medium">{post?.facultyName}</p>
                     </div>
                     <div className="flex h-full items-center bg-white border border-gray-200 rounded-2xl shadow-lg hover:bg-gray-100">
                       <div className="h-full w-12 bg-orange-500 rounded-l-lg"></div>
                       <div className="p-4 space-y-4">
                         <p className="text-xl font-medium">
-                          {post?.proposalTitle}
+                          {post?.projectTitle}
                         </p>
                         <p className="text-gray-500">
-                          {post?.proposalDescription}
+                          {post?.problemStatement}
                         </p>
                         <p className="text-black font-medium">
-                          {post?.proposalRequirements}
+                          {post?.criteria}
                         </p>
                         <button
                           onClick={() => setShown(true)}

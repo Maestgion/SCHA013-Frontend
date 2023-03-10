@@ -37,7 +37,7 @@ const App = () => {
           });
       } else if (Cookies.get("user") === "student") {
         axios
-          .get(`${API_URI}/users/single/student${uid}`)
+          .get(`${API_URI}/users/single/student/${uid}`)
           .then((res) => {
             console.log("user data", res.data);
             setUser(res.data);
